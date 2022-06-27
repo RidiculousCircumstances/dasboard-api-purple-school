@@ -1,29 +1,15 @@
 import http from 'http';
+import express from 'express';
 
 
-const host = '127.0.0.1';
 const port = 8000;
+const app = express();
 
-const server = http.createServer((req, res) => {
-
-    switch (req.method) {
-        case 'GET':
-            switch (req.url) {
-                case '/one':
-                    res.statusCode = 200;
-                    res.setHeader('Content-Type', 'text/plain');
-                    res.end('Here we go again!');
-                    break;
-            }
-            break;
-    }
-
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello!');
-
+app.get('/one', (req, res) => {
+    res.send('Here we go again');
 });
 
-server.listen(port, host, () => {
-    console.log(`Server had been started at ${host}:${port}`);
+app.listen(port, () => {
+    console.log(`Server had been started at 127.0.0.1:${port}`)
 });
+
