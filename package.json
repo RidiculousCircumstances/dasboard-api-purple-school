@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "API for a training project",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "start": "node ./dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./dist/main.js",
+    "build": "tsc"
   },
   "author": "Ivan Kozlov",
   "license": "ISC",
