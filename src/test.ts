@@ -188,25 +188,25 @@
 //     return a;
 // }
 
-class Coord {
+// class Coord {
 
-    lat: number;
-    long: number;
-    computeDistance(newLat: number, newLong: number): number {
-        let distance: number = Math.sqrt(Math.pow(Math.abs(newLat - this.lat), 2) + Math.pow(Math.abs(newLong - this.long), 2));
-        return distance;
-    }
+//     lat: number;
+//     long: number;
+//     computeDistance(newLat: number, newLong: number): number {
+//         let distance: number = Math.sqrt(Math.pow(Math.abs(newLat - this.lat), 2) + Math.pow(Math.abs(newLong - this.long), 2));
+//         return distance;
+//     }
 
-    protected test() {
+//     protected test() {
 
-    }
+//     }
 
-    constructor(lat: number, long: number) {
-        this.lat = lat;
-        this.long = long;
-    }
+//     constructor(lat: number, long: number) {
+//         this.lat = lat;
+//         this.long = long;
+//     }
 
-}
+// }
 
 // const point = new Coord(1, 5);
 
@@ -215,33 +215,33 @@ class Coord {
 
 
 
-class MapLocation extends Coord {
-    // override computeDistance(newLat: number, newLong: number): number {
-    //     return 1;
-    // }
+// class MapLocation extends Coord {
+//     // override computeDistance(newLat: number, newLong: number): number {
+//     //     return 1;
+//     // }
 
-    private _name: string;
+//     private _name: string;
 
-    get name() {
-        return this._name;
-    }
+//     get name() {
+//         return this._name;
+//     }
 
-    set name(s: string) {
-        this._name = s;
-    }
+//     set name(s: string) {
+//         this._name = s;
+//     }
 
-    static a(exp: MapLocation) {
+//     static a(exp: MapLocation) {
 
-    }
+//     }
 
 
-    constructor(name: string, lat: number, long: number) {
-        super(lat, long);
-        this._name = name;
+//     constructor(name: string, lat: number, long: number) {
+//         super(lat, long);
+//         this._name = name;
 
-    }
+//     }
 
-}
+// }
 
 
 
@@ -260,68 +260,102 @@ class MapLocation extends Coord {
 //     log(s: string) {
 //         console.log(s);
 //     }
+// // }
+
+// class MyClass<T> {
+//     public prop: T;
+
+//     constructor(prop: T) {
+//         this.prop = prop;
+//     }
+
 // }
 
-class MyClass<T> {
-    public prop: T;
+// const gen = new MyClass<number>(5);
 
-    constructor(prop: T) {
-        this.prop = prop;
+// abstract class Base {
+//     print(s: string) {
+//         console.log(s);
+//     }
+
+//     abstract error (s: string): void;
+// }
+
+// class Extender extends Base {
+//     error (s: string) {
+
+//     }
+// }
+
+// const a = new Extender();
+// a.print('aaa');
+
+
+
+
+
+
+// class A {
+//     name!: string;
+// }
+
+// class B {
+//     name!: string;
+//     anotherProp!: string;
+// }
+
+// function AB (clss: A) {
+
+// }
+
+// const Ab: A = new B();
+
+// AB(Ab);
+// AB(B);
+
+// type Coord2 = {
+//     lat: number;
+//     long: number;
+// }
+
+// type P = keyof Coord2;
+
+// let aa: P = 'lat';
+
+// function log2(a: string | null) {
+//     a?.toLocaleLowerCase();
+// }
+
+
+let router = {
+    get: (path: string) => {
+        console.log(path);
+    },
+
+    post: (path: string) => {
+        console.log(path);
+    },
+};
+
+interface IRouter {
+    method: 'get' | 'post';
+    path: string;
+}
+
+function bindRoutes (route: IRouter) {
+    router[route.method](route.path);
+}
+
+class exampleRoute implements IRouter {
+    method: "get" | "post";
+    path: string;
+    constructor(method: 'get' | 'post' ) {
+        this.method = method;
+        this.path = './HERE'
     }
-
 }
 
-const gen = new MyClass<number>(5);
+let instRouter = new exampleRoute('get')
 
-abstract class Base {
-    print(s: string) {
-        console.log(s);
-    }
+bindRoutes(instRouter);
 
-    abstract error (s: string): void;
-}
-
-class Extender extends Base {
-    error (s: string) {
-
-    }
-}
-
-const a = new Extender();
-a.print('aaa');
-
-
-
-
-
-
-class A {
-    name!: string;
-}
-
-class B {
-    name!: string;
-    anotherProp!: string;
-}
-
-function AB (clss: A) {
-
-}
-
-const Ab: A = new B();
-
-AB(Ab);
-AB(B);
-
-type Coord2 = {
-    lat: number;
-    long: number;
-}
-
-type P = keyof Coord2;
-
-let aa: P = 'lat';
-
-function log2(a: string | null) {
-    a?.toLocaleLowerCase();
-}
