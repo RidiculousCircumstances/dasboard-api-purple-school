@@ -327,35 +327,35 @@
 // }
 
 
-let router = {
-    get: (path: string) => {
-        console.log(path);
-    },
+// let router = {
+//     get: (path: string) => {
+//         console.log(path);
+//     },
 
-    post: (path: string) => {
-        console.log(path);
-    },
-};
+//     post: (path: string) => {
+//         console.log(path);
+//     },
+// };
 
-interface IRouter {
-    method: 'get' | 'post';
-    path: string;
-}
+// interface IRouter {
+//     method: 'get' | 'post';
+//     path: string;
+// }
 
-function bindRoutes (route: IRouter) {
-    router[route.method](route.path);
-}
+// function bindRoutes (route: IRouter) {
+//     router[route.method](route.path);
+// }
 
-class exampleRoute implements IRouter {
-    method: "get" | "post";
-    path: string;
-    constructor(method: 'get' | 'post' ) {
-        this.method = method;
-        this.path = './HERE'
-    }
-}
+// class exampleRoute implements IRouter {
+//     method: "get" | "post";
+//     path: string;
+//     constructor(method: 'get' | 'post' ) {
+//         this.method = method;
+//         this.path = './HERE'
+//     }
+// }
 
-let instRouter = new exampleRoute('get')
+// let instRouter = new exampleRoute('get')
 
-bindRoutes(instRouter);
+// bindRoutes(instRouter);
 

@@ -2,10 +2,12 @@
 import { BaseController } from "../common/base.controller";
 import { LoggerService } from "../logger/logger.service";
 import { Request, Response, NextFunction } from "express";
+import { HTTPError } from "../errors/http.error.class";
+import { ILoggerService } from "../logger/logger.interface";
 
 export class UserController extends BaseController {
     constructor(
-        logger: LoggerService
+        logger: ILoggerService
     ) {
         super(logger);
         this.bindRoutes([
@@ -15,11 +17,13 @@ export class UserController extends BaseController {
     }
 
     login(req: Request, res: Response, next: NextFunction) {
-        this.ok(res, 'loged in');
+        next(new HTTPError(401, 'ИДИ НА ХУЙ ХУЙЛО НЕАВТОРИЗОВАННОЕ', 'login'));
+        
     }
 
     register(req: Request, res: Response, next: NextFunction) {
         this.ok(res, 'registred');
+       
     }
 
 }
