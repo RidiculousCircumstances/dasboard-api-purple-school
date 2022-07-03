@@ -37,7 +37,7 @@
 // }
 
 // interface IDog extends IAnimal {
-//     hasOwner: boolean;  
+//     hasOwner: boolean;
 // }
 
 // const dog: IDog = {
@@ -70,7 +70,6 @@
 //     hasOwner: boolean;
 //     woof: ()
 // }
-
 
 // function sss(name: IAnotherDog): void {
 
@@ -106,7 +105,7 @@
 
 //         case 'right':
 //             return -1;
-//         default: 
+//         default:
 //             return 0;
 
 //     }
@@ -134,7 +133,6 @@
 
 // anotherConnect(con.host, con.protocol);
 
-
 // function point() {
 
 // }
@@ -150,7 +148,7 @@
 //             return -1;
 //         case Direction.Right:
 //             return +1;
-//         default: 
+//         default:
 //             return 0;
 //     }
 // }
@@ -213,8 +211,6 @@
 // const dist: number = point.computeDistance(10, 7);
 // console.log(dist);
 
-
-
 // class MapLocation extends Coord {
 //     // override computeDistance(newLat: number, newLong: number): number {
 //     //     return 1;
@@ -234,7 +230,6 @@
 
 //     }
 
-
 //     constructor(name: string, lat: number, long: number) {
 //         super(lat, long);
 //         this._name = name;
@@ -243,14 +238,10 @@
 
 // }
 
-
-
 // const namedPoint = new MapLocation('AssValley', 1010, 2089)
 // const dist = namedPoint.computeDistance(10, 65);
 // console.log();
 // MapLocation.a(namedPoint);
-
-
 
 // interface ILoggerService {
 //     log: (s: string) => void;
@@ -290,11 +281,6 @@
 // const a = new Extender();
 // a.print('aaa');
 
-
-
-
-
-
 // class A {
 //     name!: string;
 // }
@@ -325,8 +311,6 @@
 // function log2(a: string | null) {
 //     a?.toLocaleLowerCase();
 // }
-
-
 // let router = {
 //     get: (path: string) => {
 //         console.log(path);
@@ -358,4 +342,3 @@
 // let instRouter = new exampleRoute('get')
 
 // bindRoutes(instRouter);
-

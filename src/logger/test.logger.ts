@@ -1,21 +1,21 @@
-import { injectable } from "inversify";
-import { Logger } from "tslog";
-import { ILoggerService } from "./logger.interface";
+import { injectable } from 'inversify';
+import { Logger } from 'tslog';
+import { ILoggerService } from './logger.interface';
 import 'reflect-metadata';
 
 @injectable()
 export class TestLogger implements ILoggerService {
-    logger: Logger;
+	logger: Logger;
 
-    log() {
-        console.log('Логгирую');
-    }
+	log(): void {
+		console.log('Логгирую');
+	}
 
-    error() {
-        console.log('ОШИБОЧКА ВЫШЛА');
-    }
+	error(): void {
+		console.log('ОШИБОЧКА ВЫШЛА');
+	}
 
-    warn() {
-        console.log('ПРЕДУПРЕЖДАЮ');
-    }
+	warn(): void {
+		console.log('ПРЕДУПРЕЖДАЮ');
+	}
 }
