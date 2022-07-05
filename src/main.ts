@@ -7,9 +7,14 @@ import { LoggerService } from './logger/logger.service';
 import { TestLogger } from './logger/test.logger';
 import { TYPES } from './types';
 import { UserController } from './users/user.controller';
-import { IUserService } from './users/user.service.interface';
+import { IUserService } from './users/interfaces/user.service.interface';
 import { UserService } from './users/users.service';
-import { IUserController } from './users/user.controller.interface';
+import { IUserController } from './users/interfaces/user.controller.interface';
+import { IConfigService } from './config/config.service.interface';
+import { ConfigService } from './config/consfig.service';
+import { PrismaService } from './database/prisma.service';
+import { IUsersRepository } from './users/interfaces/users.repository.interface';
+import { UsersRepository } from './users/users.repository';
 
 //Injectable говорит, что класс может быть инжектирован, далее, по коду в другом классе, который требует в конструкторе
 //инстанс injectable класса, через @inject указываем идентификатор injectable класса. при этом конструктор не будет принимать,-
@@ -24,11 +29,14 @@ export interface IBootstrapReturn {
 export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	// раньше использовался инстанс Container'a, это нецудобно
 	// если приложение большое. ContainerModules позволяет алоцировать биндинги логически, помодульно
-	bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService);
-	bind<IExeptionFilter>(TYPES.IExeptionFilter).to(ExeptionFilter);
-	bind<IUserController>(TYPES.IUserController).to(UserController);
+	bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService).inSingletonScope();
+	bind<IExeptionFilter>(TYPES.IExeptionFilter).to(ExeptionFilter).inSingletonScope();
+	bind<IUserController>(TYPES.IUserController).to(UserController).inSingletonScope();
 	bind<IUserService>(TYPES.IUserService).to(UserService);
-	bind<App>(TYPES.Application).to(App);
+	bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
+	bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
+	bind<IUsersRepository>(TYPES.IUsersRepository).to(UsersRepository).inSingletonScope();
+	bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
 function bootstrap(): IBootstrapReturn {

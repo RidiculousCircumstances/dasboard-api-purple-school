@@ -1,9 +1,13 @@
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { UserEntity } from './user.enity';
-import { IUserService } from './user.service.interface';
+import { IUserService } from './interfaces/user.service.interface';
 import 'reflect-metadata';
-import { injectable } from 'inversify';
+import { inject, injectable } from 'inversify';
+import { IConfigService } from '../config/config.service.interface';
+import { TYPES } from '../types';
+import { IUsersRepository } from './interfaces/users.repository.interface';
+import { UserModel } from '@prisma/client';
 // в сервисе идет проверка того, что юзер существует
 // если он есть, возвращаем null, иначе - возвращаем нового пользователя
 // то есть, тут лежат бизнес-правила. Например, сюда мы можем добавать правило, по которому
@@ -12,13 +16,29 @@ import { injectable } from 'inversify';
 
 @injectable()
 export class UserService implements IUserService {
-	async createUser({ email, name, password }: UserRegisterDto): Promise<UserEntity | null> {
+	constructor(
+		@inject(TYPES.IConfigService) private configService: IConfigService,
+		@inject(TYPES.IUsersRepository) private userRepository: IUsersRepository,
+	) {}
+	async createUser({ email, name, password }: UserRegisterDto): Promise<UserModel | null> {
 		const newUser = new UserEntity(email, name);
-		await newUser.setPassword(password);
-		return null;
+		const salt = this.configService.get('SALT');
+		await newUser.setPassword(password, Number(salt));
+		const existedUser = await this.userRepository.find(email);
+		if (existedUser) {
+			return null;
+		} else {
+			return this.userRepository.create(newUser);
+		}
 	}
 
-	async validateUser(dto: UserLoginDto): Promise<boolean> {
-		return true;
+	async validateUser({ email, password }: UserLoginDto): Promise<boolean> {
+		const foundUser = await this.userRepository.find(email);
+		if (!foundUser) {
+			return false;
+		} else {
+			const checkedUser = new UserEntity(foundUser.email, foundUser.name, foundUser.password);
+			return await checkedUser.comparePassword(password);
+		}
 	}
 }
