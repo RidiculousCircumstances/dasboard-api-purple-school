@@ -1,5 +1,5 @@
 import { Router, Response, json } from 'express';
-import { ExpressReturnType, IControllerRoute } from './route.interface';
+import { ExpressReturnType, IControllerRoute } from './interfaces/route.interface';
 import { ILoggerService } from '../logger/logger.interface';
 import { inject, injectable } from 'inversify';
 import 'reflect-metadata';

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { injectable } from 'inversify';
 import { JwtPayload, verify } from 'jsonwebtoken';
-import { IMiddleware } from './middleware.interface';
+import { IMiddleware } from './interfaces/middleware.interface';
 
 @injectable()
 export class AuthMiddleware implements IMiddleware {

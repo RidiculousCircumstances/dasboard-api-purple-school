@@ -12,6 +12,7 @@ import { IUserService } from './interfaces/user.service.interface';
 import { ValidateMiddleware } from '../common/validate.middleware';
 import { sign } from 'jsonwebtoken';
 import { IConfigService } from '../config/config.service.interface';
+import { AuthGuardMiddleware } from '../common/auth.guard.middleware';
 
 // В контроллере находится логика обработки результата ответа от сервиса: то есть,
 // здесь расположены правила, по которым, в зависимости от того, какие данные вернет сервис,
@@ -42,6 +43,7 @@ export class UserController extends BaseController implements IUserController {
 				path: '/info',
 				method: 'get',
 				function: this.info,
+				middlewares: [new AuthGuardMiddleware()],
 			},
 		]);
 	}
@@ -73,7 +75,8 @@ export class UserController extends BaseController implements IUserController {
 	}
 
 	async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
-		this.ok(res, { email: user });
+		const foundUser = await this.userService.getUserInfo(user);
+		this.ok(res, { email: foundUser?.email, id: foundUser?.id });
 	}
 
 	private signJWT(email: string, secret: string): Promise<string> {
