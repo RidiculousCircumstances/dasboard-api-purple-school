@@ -50,4 +50,8 @@ export class App {
 		this.server = this.app.listen(this.port);
 		this.logger.log(`Server has been started at 127.0.0.1:${this.port}`);
 	}
+
+	public close(): void {
+		this.server.close();
+	}
 }
